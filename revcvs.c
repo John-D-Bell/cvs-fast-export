@@ -275,7 +275,7 @@ rev_list_patch_vendor_branch(rev_list *rl, cvs_file *cvs)
 	}
     }
 #if CVSDEBUG
-    fprintf(stderr, "%s spliced:\n", cvs->name);
+/*???    fprintf(stderr, "%s spliced:\n", cvs->name);	???*/
     for (t = trunk->commit; t; t = t->parent) {
 	dump_number_file(stderr, "\t", &t->file->number);
 	fprintf(stderr, "\n");
@@ -706,7 +706,7 @@ rev_list_cvs(cvs_file *cvs)
     /*
      * Search for other branches
      */
-#if CVSDEBUG
+#if CVSDEBUG && 0
     printf("building branches for %s\n", cvs->name);
 #endif
     

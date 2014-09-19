@@ -203,6 +203,9 @@ main(int argc, char **argv)
     mallopt(M_TOP_PAD,16*1024*1024); /* grab memory in 16MB chunks */
 #endif /* __GLIBC__ */
     start_time = time(NULL);
+#ifdef RLMDEBUG
+    start_tracelog(argc, argv);
+#endif
 
     /* force times using mktime to be interpreted in UTC */
     setenv("TZ", "UTC", 1);
@@ -319,6 +322,11 @@ main(int argc, char **argv)
 			   &load_total_files, &err);
 
     /* commit set coalescence happens here */
+#ifdef RLMDEBUG
+    trace_this("about to 'rev_list_merge(%s, %s)'...\n",
+      (head->heads)->ref_name,
+      ((head->heads)->commit)->commitid);
+#endif /* RLMDEBUG */
     rl = rev_list_merge(head);
 #ifdef ORDERDEBUG2
     dump_rev_tree(head, stderr);
@@ -355,6 +363,9 @@ main(int argc, char **argv)
     git_commit_cleanup();
     export_wrap();
     free_author_map();
+#ifdef	RLMDEBUG
+    end_tracelog();
+#endif
     return err > 0;
 }
 

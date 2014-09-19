@@ -587,4 +587,10 @@ void progress_step(void);
 void progress_jump(int /*count*/);
 void progress_end(const char * /*format*/, ...) _printflike(1, 2);
 
+#ifdef RLMDEBUG
+void start_tracelog(int /* av */, char ** /* av */);
+void trace_this(char const *format,...) _printflike(1,2);
+void end_tracelog(void);
+#endif
+
 #endif /* _CVS_H_ */

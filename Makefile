@@ -28,7 +28,10 @@ CFLAGS=$(GCC_WARNINGS) -DVERSION=\"$(VERSION)\"
 # To enable assertions of red black trees, uncomment the following line
 #CFLAGS += -DRBDEBUG=1
 # To enable debugging of CVS rev list generation, uncomment the following line
-#CFLAGS += -DCVSDEBUG=1
+CFLAGS += -DCVSDEBUG=1
+##  2014-09-18  JDB
+## To enable debugging of "rev_list_merge(), uncomment the following line
+CFLAGS += -DRLMDEBUG=1
 # To enable debugging of order instability issues
 #CFLAGS += -DORDERDEBUG=1
 
@@ -46,7 +49,8 @@ CFLAGS += -O3
 
 OBJS=gram.o lex.o rbtree.o main.o import.o dump.o cvsnumber.o \
 	cvsutil.o revdir.o revlist.o atom.o revcvs.o generate.o export.o \
-	nodehash.o tags.o authormap.o graph.o utils.o
+	nodehash.o tags.o authormap.o graph.o utils.o \
+	tracelog.o
 
 cvs-fast-export: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@ 
